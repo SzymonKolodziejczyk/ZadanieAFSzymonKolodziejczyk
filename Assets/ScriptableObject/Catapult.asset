@@ -16,10 +16,12 @@ MonoBehaviour:
   <unitType>k__BackingField: 3
   <attributeTypes>k__BackingField: 02000000
   <unitStats>k__BackingField:
-    <healthPoints>k__BackingField: 100
-    <armorPoints>k__BackingField: 10
+    <healthPoints>k__BackingField: 10
+    <armorPoints>k__BackingField: 2
     <attackInterval>k__BackingField: 3
-    <attackDamage>k__BackingField: 30
-    <supereffectiveDamage>k__BackingField: []
+    <attackDamage>k__BackingField: 8
+    <supereffectiveDamage>k__BackingField:
+    - <attributeType>k__BackingField: 0
+      <attackDamage>k__BackingField: 1
   <unitPrefab>k__BackingField: {fileID: -2313900605938540708, guid: ed4ce0c839348b549899850106d06d47,
     type: 3}

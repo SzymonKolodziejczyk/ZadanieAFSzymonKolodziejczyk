@@ -10,9 +10,8 @@ namespace AFSInterview.Battle
         [field: SerializeField] private BattleData BattleData { get; set; }
         [field: SerializeField] private Transform Player1ArmyTransform { get; set; }
         [field: SerializeField] private Transform Player2ArmyTransform { get; set; }
-        [field: SerializeField] private UnitIndicator UnitIndicator { get; set; }
-
         [field: Header("UI")]
+        [field: SerializeField] private UnitIndicator UnitIndicator { get; set; }
         [field: SerializeField] public Tooltip Tooltip { get; set; }
         private List<Unit> AllUnits { get; set; } = new List<Unit>();
 

@@ -70,6 +70,13 @@ namespace AFSInterview.Battle
             float t = (distance - 2) / distance;
 
             Vector3 destination = Vector3.LerpUnclamped(startPosition, targetPosition, t);
+
+            OnDealDamage();
+
+            void OnDealDamage()
+            {
+                onDealDamage?.Invoke();
+            }
         }
 
         public void DealDamage(int damage)
