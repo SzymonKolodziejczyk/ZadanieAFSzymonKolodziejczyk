@@ -15,11 +15,13 @@
 
         private Camera cameraMain;
         private int layerMask;
+        private ItemActionResolver itemActionResolver;
 
         private void Start()
         {
             cameraMain = Camera.main;
             layerMask = LayerMask.GetMask("Item");
+            itemActionResolver = new ItemActionResolver(inventoryController);
 
             UpdateMoneyText();
 
@@ -31,6 +33,9 @@
             if (Input.GetMouseButtonDown(0))
                 TryPickUpItem();
 
+            if (Input.GetKeyDown(KeyCode.E))
+                TryUseItem();
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 inventoryController.SellAllItemsUpToValue(itemSellMaxValue);
@@ -40,7 +45,7 @@
 
         private void UpdateMoneyText()
         {
-            moneyText.text = "Money: " + inventoryController.Money;
+            moneyText.text = "Money: " + inventoryController.Sellable;
         }
 
         private void SpawnNewItem()
@@ -52,12 +57,13 @@
                 Random.Range(spawnAreaBounds.min.z, spawnAreaBounds.max.z)
             );
 
+            // Could be optimized by using object pooling if necessary
             Instantiate(itemPrefab, position, Quaternion.identity, itemSpawnParent);
         }
 
         private void TryPickUpItem()
         {
-            if (GetItemHolderOnPosition(Input.mousePosition, out IItemHolder itemHolder))
+            if (TryGetItemHolderOnPosition(Input.mousePosition, out IItemHolder itemHolder))
             {
                 var item = itemHolder.GetItem(true);
                 inventoryController.AddItem(item);
@@ -65,7 +71,20 @@
             }
         }
 
-        private bool GetItemHolderOnPosition(Vector3 position, out IItemHolder itemHolder)
+        private void TryUseItem()
+		{
+			if (TryGetItemHolderOnPosition(Input.mousePosition, out IItemHolder itemHolder))
+			{
+				var item = itemHolder.GetItem(true);
+
+				ItemAction action = item.Use();
+				itemActionResolver.Resolve(action);
+				UpdateMoneyText();
+				Debug.Log("Used " + item.Name + " item and now have " + inventoryController.Consumable + " money and " + inventoryController.ItemsCount + " items");
+			}
+		}
+
+        private bool TryGetItemHolderOnPosition(Vector3 position, out IItemHolder itemHolder)
         {
             itemHolder = null;
 
