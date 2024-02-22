@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3305069ff021f4faf81928a6e1b953, type: 3}
   m_Name: Druid
   m_EditorClassIdentifier: 
-  type: 
-  characterAttribute: 0
-  armor_points: 0
-  attack_interval: 0
-  attack_damage: 0
+  <unitName>k__BackingField: Druid
+  <unitType>k__BackingField: 2
+  <attributeTypes>k__BackingField: 0000000001000000
+  <unitStats>k__BackingField:
+    <healthPoints>k__BackingField: 100
+    <armorPoints>k__BackingField: 15
+    <attackInterval>k__BackingField: 1
+    <attackDamage>k__BackingField: 5
+    <SupereffectiveDamage>k__BackingField:
+    - <attributeType>k__BackingField: 2
+      <attackDamage>k__BackingField: 5
