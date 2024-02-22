@@ -11,6 +11,6 @@ namespace AFSInterview.Battle
         [field: SerializeField] public int armorPoints { get; set; }
         [field: SerializeField] public int attackInterval { get; set; }
         [field: SerializeField] public int attackDamage { get; set; }
-        [field: SerializeField] public List<SupereffectiveDamage> SupereffectiveDamage { get; set; } = new List<SupereffectiveDamage>();
+        [field: SerializeField] public List<SupereffectiveDamage> supereffectiveDamage { get; set; } = new List<SupereffectiveDamage>();
     }
 }

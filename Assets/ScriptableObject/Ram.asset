@@ -20,4 +20,6 @@ MonoBehaviour:
     <armorPoints>k__BackingField: 30
     <attackInterval>k__BackingField: 3
     <attackDamage>k__BackingField: 10
-    <SupereffectiveDamage>k__BackingField: []
+    <supereffectiveDamage>k__BackingField: []
+  <unitPrefab>k__BackingField: {fileID: 6431670091182956809, guid: 1ca856ea1edbc8b4e8a1e62430b758ef,
+    type: 3}

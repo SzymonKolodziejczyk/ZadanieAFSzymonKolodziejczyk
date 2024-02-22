@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e668a028ba6624390b6042ecc79f61, type: 3}
+  m_Name: BattleData
+  m_EditorClassIdentifier: 
+  <Player1Army>k__BackingField:
+  - {fileID: 11400000, guid: e2c23c4e2c9ee594aa4b392e207b703c, type: 2}
+  - {fileID: 11400000, guid: e2c23c4e2c9ee594aa4b392e207b703c, type: 2}
+  - {fileID: 11400000, guid: c44b84b98ad846e43b7f785f00230728, type: 2}
+  - {fileID: 11400000, guid: 0109f280487e1e541ae988acf07c3d09, type: 2}
+  <Player2Army>k__BackingField:
+  - {fileID: 11400000, guid: 055a9c8b218857640835301ca02778c6, type: 2}
+  - {fileID: 11400000, guid: 055a9c8b218857640835301ca02778c6, type: 2}
+  - {fileID: 11400000, guid: 055a9c8b218857640835301ca02778c6, type: 2}
+  - {fileID: 11400000, guid: 560fa5617c9d2564a9274b4aad446310, type: 2}
+  - {fileID: 11400000, guid: 0109f280487e1e541ae988acf07c3d09, type: 2}

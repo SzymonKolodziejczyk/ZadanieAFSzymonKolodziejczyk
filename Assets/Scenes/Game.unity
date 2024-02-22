@@ -880,9 +880,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 717833686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e0b28e218bf4b26a46ee41ec1fa24f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f6e85bb0e6d15744b0bf83d920cdc1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BattleData>k__BackingField: {fileID: 11400000, guid: 644f437a2b705114abffaec5b629ee0e,
+    type: 2}
+  <Player1ArmyTransform>k__BackingField: {fileID: 278868168}
+  <Player2ArmyTransform>k__BackingField: {fileID: 1353391285}
 --- !u!1 &726838010
 GameObject:
   m_ObjectHideFlags: 0
