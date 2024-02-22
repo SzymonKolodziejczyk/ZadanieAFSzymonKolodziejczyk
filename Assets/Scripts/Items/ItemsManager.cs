@@ -8,7 +8,7 @@
         [SerializeField] private InventoryController inventoryController;
         [SerializeField] private int itemSellMaxValue;
         [SerializeField] private Transform itemSpawnParent;
-        [SerializeField] private GameObject itemPrefab;
+        [SerializeField] private GameObject[] itemPrefabs;
         [SerializeField] private BoxCollider itemSpawnArea;
         [SerializeField] private float itemSpawnInterval;
         [SerializeField] private TextMeshProUGUI moneyText;
@@ -58,7 +58,7 @@
             );
 
             // Could be optimized by using object pooling if necessary
-            Instantiate(itemPrefab, position, Quaternion.identity, itemSpawnParent);
+            Instantiate(itemPrefabs[Random.Range(0, itemPrefabs.Length)], position, Quaternion.identity, itemSpawnParent);
         }
 
         private void TryPickUpItem()
