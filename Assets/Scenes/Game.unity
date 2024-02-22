@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,16 +155,40 @@ MonoBehaviour:
   items:
   - name: Wooden shield
     value: 90
+    action:
+      <Type>k__BackingField: 1
+      <Name>k__BackingField: 
+      <Value>k__BackingField: 0
   - name: Bow
     value: 150
+    action:
+      <Type>k__BackingField: 1
+      <Name>k__BackingField: 
+      <Value>k__BackingField: 0
   - name: Mana Potion
     value: 60
+    action:
+      <Type>k__BackingField: 2
+      <Name>k__BackingField: 
+      <Value>k__BackingField: 0
   - name: Sword
     value: 130
+    action:
+      <Type>k__BackingField: 1
+      <Name>k__BackingField: 
+      <Value>k__BackingField: 0
   - name: Long Sword
     value: 160
+    action:
+      <Type>k__BackingField: 1
+      <Name>k__BackingField: 
+      <Value>k__BackingField: 0
   - name: Plate Armor
     value: 300
+    action:
+      <Type>k__BackingField: 1
+      <Name>k__BackingField: 
+      <Value>k__BackingField: 0
   money: 280
 --- !u!4 &117263
 Transform:
@@ -494,6 +518,7 @@ MonoBehaviour:
     type: 3}
   itemSpawnArea: {fileID: 1201324633}
   itemSpawnInterval: 2.5
+  moneyText: {fileID: 1931683898}
 --- !u!1 &246465937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1034,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 1562054653796185208, guid: 70297e35c79c32843b2cbbda048d720c,
+        type: 3}
+      propertyPath: item.action.<Type>k__BackingField
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6760591476060598716, guid: 70297e35c79c32843b2cbbda048d720c,
         type: 3}
