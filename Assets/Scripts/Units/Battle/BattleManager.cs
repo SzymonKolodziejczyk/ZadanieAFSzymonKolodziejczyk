@@ -36,7 +36,10 @@ namespace AFSInterview.Battle
                 Debug.LogWarning($"No units in armies");
                 return;
             }
+
             UnitIndicator.Hide();
+
+            CheckConditions();
             StartNextTurn();
         }
 
@@ -50,11 +53,14 @@ namespace AFSInterview.Battle
 
                 Unit unit = Instantiate(unitData.unitPrefab, position, new Quaternion(), parent);
                 unit.Initialize(unitData, playername);
+                unit.OnUnitClicked += Unit_OnUnitClicked;
+
+                unit.OnUnitHoverStarted += Unit_OnUnitHoverStarted;
+                unit.OnUnitHoverEnded += Unit_OnUnitHoverEnded;
 
                 AllUnits.Add(unit);
             }
         }
-
         
         private void StartNextTurn()
         {
@@ -82,6 +88,72 @@ namespace AFSInterview.Battle
             }
 
             UnitIndicator.Show(currentUnit.transform.position);
+        }
+
+        private void CheckConditions()
+        {
+            List<PlayerNumber> currentPlayers = new List<PlayerNumber>();
+
+            for (int i = 0; i < AllUnits.Count; i++)
+            {
+                Unit unit = AllUnits[i];
+                if (!currentPlayers.Contains(unit.PlayerNumber))
+                {
+                    currentPlayers.Add(unit.PlayerNumber);
+                }
+            }
+
+            if (currentPlayers.Count <= 1)
+            {
+                isCombat = false;
+                Debug.Log($"Battle Ended");
+            }
+        }
+
+        private void Unit_OnUnitHoverEnded(Unit unit)
+        {
+            
+        }
+
+        private void Unit_OnUnitHoverStarted(Unit unit)
+        {
+            int damage = 0;
+
+            if (currentUnit.PlayerNumber != unit.PlayerNumber)
+            {
+                damage = BattleRules.GetResultDamage(currentUnit.UnitData, unit.UnitData);
+            }
+        }
+
+        private void Unit_OnUnitClicked(Unit target)
+        {
+            if (currentUnit == null || currentUnit.HadTurn)
+            {
+                return;
+            }
+
+            if (currentUnit.PlayerNumber == target.PlayerNumber)
+            {
+                return;
+            }
+
+            UnitIndicator.Hide();
+
+            int damage = BattleRules.GetResultDamage(currentUnit.UnitData, target.UnitData);
+            currentUnit.AttackUnit(target, DealDamage);
+
+            void DealDamage()
+            {
+                target.DealDamage(damage);
+
+                if (!target.IsAlive)
+                {
+                    AllUnits.Remove(target);
+                    target.KillUnit();
+                    CheckConditions();
+                }
+            }
+            StartNextTurn();
         }
     }
 }
