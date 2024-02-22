@@ -10,6 +10,7 @@ namespace AFSInterview.Battle
         [field: SerializeField] private BattleData BattleData { get; set; }
         [field: SerializeField] private Transform Player1ArmyTransform { get; set; }
         [field: SerializeField] private Transform Player2ArmyTransform { get; set; }
+        [field: SerializeField] private UnitIndicator UnitIndicator { get; set; }
 
         private List<Unit> AllUnits { get; set; } = new List<Unit>();
 
@@ -35,6 +36,8 @@ namespace AFSInterview.Battle
                 Debug.LogWarning($"No units in armies");
                 return;
             }
+            UnitIndicator.Hide();
+            StartNextTurn();
         }
 
         private void SpawnArmy(List<UnitData> armyList, Transform parent, PlayerNumber playername)
@@ -50,6 +53,35 @@ namespace AFSInterview.Battle
 
                 AllUnits.Add(unit);
             }
+        }
+
+        
+        private void StartNextTurn()
+        {
+            if (!isCombat)
+            {
+                return;
+            }
+
+            currentUnit = AllUnits.FirstOrDefault(x => x.HadTurn == false);
+
+            if (!currentUnit)
+            {
+                AllUnits.ForEach(x => x.RefreshTurn());
+                StartNextTurn();
+                return;
+            }
+
+            currentUnit.StartTurn();
+
+            if (!currentUnit.CanUseSkill)
+            {
+                currentUnit.SkipTurn();
+                StartNextTurn();
+                return;
+            }
+
+            UnitIndicator.Show(currentUnit.transform.position);
         }
     }
 }
