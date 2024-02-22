@@ -11,12 +11,12 @@ namespace AFSInterview.Battle
 
         public bool HadTurn { get; private set; }
         public PlayerNumber PlayerNumber { get; private set; }
-        public int CurrentHealthPoints { get; private set; }
-        public int CurrentCooldown { get; private set; }
+        public int currentHealthPoints { get; private set; }
+        public int currentCooldown { get; private set; }
         public UnitData UnitData { get; private set; }
 
-        public bool CanUseSkill => CurrentCooldown == 0;
-        public bool IsAlive => CurrentHealthPoints > 0;
+        public bool CanUseSkill => currentCooldown == 0;
+        public bool IsAlive => currentHealthPoints > 0;
 
         private void OnMouseEnter()
         {
@@ -39,13 +39,13 @@ namespace AFSInterview.Battle
             HadTurn = false;
             PlayerNumber = playername;
 
-            CurrentHealthPoints = UnitData.unitStats.healthPoints;
-            CurrentCooldown = 0;
+            currentHealthPoints = UnitData.unitStats.healthPoints;
+            currentCooldown = 0;
         }
 
         public void StartTurn()
         {
-            CurrentCooldown = Math.Max(CurrentCooldown - 1, 0);
+            currentCooldown = Math.Max(currentCooldown - 1, 0);
         }
 
         public void SkipTurn()
@@ -61,7 +61,7 @@ namespace AFSInterview.Battle
         public void AttackUnit(Unit target, Action onDealDamage)
         {
             HadTurn = true;
-            CurrentCooldown = UnitData.unitStats.attackInterval;
+            currentCooldown = UnitData.unitStats.attackInterval;
 
             Vector3 startPosition = transform.position;
             Vector3 targetPosition = target.transform.position;
@@ -74,13 +74,54 @@ namespace AFSInterview.Battle
 
         public void DealDamage(int damage)
         {
-            CurrentHealthPoints -= damage;
-            CurrentHealthPoints = Math.Max(CurrentHealthPoints, 0);
+            currentHealthPoints -= damage;
+            currentHealthPoints = Math.Max(currentHealthPoints, 0);
         }
 
         public void KillUnit()
         {
             Destroy(gameObject);
+        }
+        public string GetDescription(int damage)
+        {
+            string description = string.Empty;
+
+            description += UnitData.unitName + "\n";
+            description += $"HP: {currentHealthPoints}";
+            if (damage > 0)
+            {
+                description += $"<color=red>-{damage}</color>";
+            }
+
+            description += $"/{UnitData.unitStats.healthPoints}\n";
+            description += $"Damage: {UnitData.unitStats.attackDamage}\n";
+            description += $"Armor: {UnitData.unitStats.armorPoints}\n";
+            description += $"Cooldown: {UnitData.unitStats.attackInterval}({currentCooldown})\n";
+            if (UnitData.attributeTypes.Count > 0)
+            {
+                description += "Attributes: ";
+                for (int i = 0; i < UnitData.attributeTypes.Count; i++)
+                {
+                    description += $"{UnitData.attributeTypes[i]}";
+
+                    if (i < UnitData.attributeTypes.Count - 1)
+                    {
+                        description += ", ";
+                    }
+                }
+                description += "\n";
+            }
+
+            if (UnitData.unitStats.supereffectiveDamage.Count > 0)
+            {
+                description += "Bonus damage:\n";
+                for (int i = 0; i < UnitData.unitStats.supereffectiveDamage.Count; i++)
+                {
+                    description += $"{UnitData.unitStats.supereffectiveDamage[i].attributeType}: {UnitData.unitStats.supereffectiveDamage[i].attackDamage:+#;-#;0}\n";
+                }
+            }
+
+            return description;
         }
     }
 }

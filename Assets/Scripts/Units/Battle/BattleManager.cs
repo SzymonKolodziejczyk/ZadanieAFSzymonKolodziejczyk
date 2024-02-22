@@ -12,6 +12,8 @@ namespace AFSInterview.Battle
         [field: SerializeField] private Transform Player2ArmyTransform { get; set; }
         [field: SerializeField] private UnitIndicator UnitIndicator { get; set; }
 
+        [field: Header("UI")]
+        [field: SerializeField] public Tooltip Tooltip { get; set; }
         private List<Unit> AllUnits { get; set; } = new List<Unit>();
 
         private Unit currentUnit { get; set; }
@@ -112,7 +114,7 @@ namespace AFSInterview.Battle
 
         private void Unit_OnUnitHoverEnded(Unit unit)
         {
-            
+            Tooltip.HideText();
         }
 
         private void Unit_OnUnitHoverStarted(Unit unit)
@@ -123,6 +125,7 @@ namespace AFSInterview.Battle
             {
                 damage = BattleRules.GetResultDamage(currentUnit.UnitData, unit.UnitData);
             }
+            Tooltip.ShowTooltip(unit.transform.position, unit.GetDescription(damage));
         }
 
         private void Unit_OnUnitClicked(Unit target)
@@ -138,6 +141,7 @@ namespace AFSInterview.Battle
             }
 
             UnitIndicator.Hide();
+            Tooltip.HideText();
 
             int damage = BattleRules.GetResultDamage(currentUnit.UnitData, target.UnitData);
             currentUnit.AttackUnit(target, DealDamage);
