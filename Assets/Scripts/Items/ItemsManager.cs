@@ -6,13 +6,20 @@
     public class ItemsManager : MonoBehaviour
     {
         [SerializeField] private InventoryController inventoryController;
+
+        [Header("Items")]
+
+        [Range(0.0F, 1000.0F)]
         [SerializeField] private int itemSellMaxValue;
         [SerializeField] private Transform itemSpawnParent;
         [SerializeField] private GameObject[] itemPrefabs;
         [SerializeField] private BoxCollider itemSpawnArea;
+        [Range(0.0F, 60.0F)]
         [SerializeField] private float itemSpawnInterval;
         [SerializeField] private TextMeshProUGUI moneyText;
 
+        [Header("UI elements")]
+        
         private Camera cameraMain;
         private int layerMask;
         private ItemActionResolver itemActionResolver;

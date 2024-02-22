@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3305069ff021f4faf81928a6e1b953, type: 3}
+  m_Name: Druid
+  m_EditorClassIdentifier: 
+  type: 
+  characterAttribute: 0
+  armor_points: 0
+  attack_interval: 0
+  attack_damage: 0
