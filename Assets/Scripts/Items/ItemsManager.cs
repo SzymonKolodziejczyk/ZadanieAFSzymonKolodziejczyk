@@ -34,7 +34,8 @@
                 TryPickUpItem();
 
             if (Input.GetKeyDown(KeyCode.E))
-                TryUseItem();
+                inventoryController.UseConsumable(itemSellMaxValue);
+                UpdateMoneyText();
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -71,7 +72,7 @@
             }
         }
 
-        private void TryUseItem()
+        /*private void TryUseItem()
 		{
 			if (TryGetItemHolderOnPosition(Input.mousePosition, out IItemHolder itemHolder))
 			{
@@ -82,7 +83,7 @@
 				UpdateMoneyText();
 				Debug.Log("Used " + item.Name + " item and now have " + inventoryController.Consumable + " money and " + inventoryController.ItemsCount + " items");
 			}
-		}
+		}*/
 
         private bool TryGetItemHolderOnPosition(Vector3 position, out IItemHolder itemHolder)
         {

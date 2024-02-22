@@ -34,20 +34,52 @@
 			}
 		}
 
-		public void UseConsumable()
+		public void UseConsumable(int maxValue)
 		{
+			List<Item> itemsToRemove = new List<Item>();
+
 			var random = UnityEngine.Random.Range(0, 2);
             if (random == 0)
             {
-				money += 15;
-				AddSellable(money);
-				Debug.Log("Used consumable and added money. You now have " + ItemsCount + " items");
+				for (var i = items.Count - 1; i >= 0; i--)
+				{
+					var itemValue = items[i].Value;
+					var itemType = items[i].action.Type;
+
+					if (itemValue >= maxValue || itemType != ItemAction.ActionType.Consumable)
+						continue;
+
+					money += itemValue;
+					itemsToRemove.Add(items[i]);
+					Debug.Log("Used consumable and got " + itemValue + " money and you now have " + ItemsCount + " items");
+				}
+
+				foreach (var itemToRemove in itemsToRemove)
+				{
+					items.Remove(itemToRemove);
+				}
 			}
             else
             {
-				var randomItem = new Item("RustySword", 35);
-				AddItem(randomItem);
-				Debug.Log("Used consumable and added " + randomItem.Name + " with value of " + randomItem.Value + " and you now have " + ItemsCount + " items");
+				for (var i = items.Count - 1; i >= 0; i--)
+				{
+					var itemValue = items[i].Value;
+					var itemType = items[i].action.Type;
+
+					if (itemValue >= maxValue || itemType != ItemAction.ActionType.Consumable)
+						continue;
+
+					var randomItem = new Item("Golden Apple", 35);
+					AddItem(randomItem);
+			
+					itemsToRemove.Add(items[i]);
+					Debug.Log("Used consumable and added " + randomItem.Name + " with value of " + randomItem.Value + " and you now have " + ItemsCount + " items");
+				}
+
+				foreach (var itemToRemove in itemsToRemove)
+				{
+					items.Remove(itemToRemove);
+				}
 			}
         }
 
@@ -58,7 +90,7 @@
 
 		public void AddConsumable(int value)
 		{
-			UseConsumable();
+			money += value;
 		}
 
 		public void AddItem(Item item)
